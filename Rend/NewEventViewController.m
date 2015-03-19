@@ -83,6 +83,7 @@
 - (IBAction)shareLocation:(id)sender
     {
     NSLog(@"Hello");
+       
    /* PFQuery *query = [PFInstallation query];
         [query whereKey:@"channels" equalTo:@"global"];
     
@@ -122,7 +123,7 @@
         PFQuery *query = [PFQuery queryWithClassName:@"_User"];
         // PFObject *object = [query whereKey:@"objectId" equalTo:string];
         PFObject *object = [query getObjectWithId: string];
-        [object setObject:@"" forKey:@"channels"];
+        [object setObject:@"hello" forKey:@"channels"];
         [object saveInBackground];
          
     }
@@ -136,8 +137,24 @@
             [object saveInBackground];
             
         }*/
-   
+        
+    //cloud code module to modify all users instead of just current user
+        
+        
+        [PFCloud callFunctionInBackground:@"modifyUser" withParameters:@{@"userId": @"kxbVtxD9o1"} block:^(id object, NSError *error)
+         {
+             if (!error)
+             {
+                 NSLog(@"SUCCESS");
+             }
+             else
+             {
+                 NSLog(@"ERROR");
+             }
+         }];
     
+        
+        
     for (NSString *string in friends)
     {
         NSLog(@"%@", string);
